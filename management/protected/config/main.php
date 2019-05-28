@@ -15,7 +15,10 @@ return array(
             'class' => 'CDbConnection',
             'connectionString' => 'mysql:host=localhost;dbname=salayateac_disc',
             'emulatePrepare' => true,
-
+            // 'username' => 'salayateac_disc',
+            // 'password' => '9bNMMbbwRke3',
+            'username' => 'root',
+            'password' => 'P@ssw0rd',
             'charset' => 'utf8'
         ),
         'Smtpmail' => array(
