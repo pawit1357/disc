@@ -64,7 +64,31 @@ class QuestionnaireController extends CController {
 	        'data' => $result
 	    ) );
 	}
-	
+
+	public function actionPrint() {
+	    // Authen Login
+	    if (! UserLoginUtils::isLogin ()) {
+	        $this->redirect ( Yii::app ()->createUrl ( 'Site/login' ) );
+	    }
+	    if (! UserLoginUtils::authorizePage ( $_SERVER ['REQUEST_URI'] )) {
+	        $this->redirect ( Yii::app ()->createUrl ( 'DashBoard/Permission' ) );
+		}
+
+		$image_url =  $_GET ['charts'] ;
+		$imgURL = "http://export.highcharts.com/charts/".$image_url;
+		
+		// Image path
+		$img = 'D:\Work\Outsource\www\PHPWord\Examples\disc.png';
+		$ch = curl_init($imgURL);
+		$fp = fopen($img, 'wb');
+		curl_setopt($ch, CURLOPT_FILE, $fp);
+		curl_setopt($ch, CURLOPT_HEADER, 0);
+		curl_exec($ch);
+		curl_close($ch);
+		fclose($fp);
+
+	    $this->render ( '//questionnaire/print' );
+	}
 	public function loadModel() {
 		if ($this->_model === null) {
 			if (isset ( $_GET ['id'] )) {

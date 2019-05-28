@@ -10,7 +10,7 @@ class Questionnaire extends CActiveRecord {
 	    return array ();
 	}
 	public function rules() {
-		return array (array ('id,request_ip,person_name,person_sex,person_age,person_phone_num,person_email,create_date','safe' ));
+		return array (array ('id,group_id,request_ip,person_name,person_sex,person_age,person_phone_num,person_email,start_date,end_date,image_url,create_date','safe' ));
 	}
 	public function attributeLabels() {
 		return array ()
@@ -33,7 +33,7 @@ class Questionnaire extends CActiveRecord {
 						'defaultOrder' => 't.id asc' 
 				),
 				'pagination' => array (
-						'pageSize' => 15 
+						'pageSize' => 1500 
 				) // ConfigUtil::getDefaultPageSize()
  
 		) );

@@ -1,150 +1,53 @@
+<form id="Form1" method="post" enctype="multipart/form-data"
+	class="form-horizontal">
+
 <?php
-$posM = array();
-$posL = array();
-$posA = array();
+    $charts = array();
+    $xs1 = array();
+    $xs2 = array();
+    $xs3 = array();
 
 $sql="
 SELECT 
     (CASE
-        WHEN `questionnaire_result`.`type` = 'D' THEN 1
-        WHEN `questionnaire_result`.`type` = 'I' THEN 2
-        WHEN `questionnaire_result`.`type` = 'S' THEN 3
-        WHEN `questionnaire_result`.`type` = 'C' THEN 4
+        WHEN type = 'D' THEN 1
+        WHEN type = 'I' THEN 2
+        WHEN type = 'S' THEN 3
+        WHEN type = 'C' THEN 4
     END) AS SEQ,
-    `questionnaire_result`.`type`,
+    type,
+    (CASE 
+		WHEN type = 'D' THEN (SELECT IFNULL(MAX(seq), 0) FROM m_data WHERE type = 'M' AND D <> '' AND D <= M)
+        WHEN type = 'I' THEN (SELECT IFNULL(MAX(seq), 0) FROM m_data WHERE type = 'M' AND I <> '' AND I <= M)
+        WHEN type = 'S' THEN (SELECT IFNULL(MAX(seq), 0) FROM m_data WHERE type = 'M' AND S <> '' AND S <= M)
+        WHEN type = 'C' THEN (SELECT IFNULL(MAX(seq), 0) FROM m_data WHERE type = 'M' AND C <> '' AND C <= M) 
+	END) AS M,
     (CASE
-        WHEN
-            type = 'D'
-        THEN
-            (SELECT 
-                    IFNULL(MAX(seq), 0)
-                FROM
-                    `m_data`
-                WHERE
-                    `m_data`.`type` = 'M' AND D <> ''
-                        AND D <= `questionnaire_result`.`M`)
-        WHEN
-            type = 'I'
-        THEN
-            (SELECT 
-                    IFNULL(MAX(seq), 0)
-                FROM
-                    `m_data`
-                WHERE
-                    `m_data`.`type` = 'M' AND I <> ''
-                        AND I <= `questionnaire_result`.`M`)
-        WHEN
-            type = 'S'
-        THEN
-            (SELECT 
-                    IFNULL(MAX(seq), 0)
-                FROM
-                    `m_data`
-                WHERE
-                    `m_data`.`type` = 'M' AND S <> ''
-                        AND S <= `questionnaire_result`.`M`)
-        WHEN
-            type = 'C'
-        THEN
-            (SELECT 
-                    IFNULL(MAX(seq), 0)
-                FROM
-                    `m_data`
-                WHERE
-                    `m_data`.`type` = 'M' AND C <> ''
-                        AND C <= `questionnaire_result`.`M`)
-    END) AS M,
-    (CASE
-        WHEN
-            type = 'D'
-        THEN
-            28 - (SELECT 
-                    IFNULL(MAX(seq), 0)
-                FROM
-                    `m_data`
-                WHERE
-                    `m_data`.`type` = 'L' AND D <> ''
-                        AND D <= `questionnaire_result`.`L`)
-        WHEN
-            type = 'I'
-        THEN
-            28 - (SELECT 
-                    IFNULL(MAX(seq), 0)
-                FROM
-                    `m_data`
-                WHERE
-                    `m_data`.`type` = 'L' AND I <> ''
-                        AND I <= `questionnaire_result`.`L`)
-        WHEN
-            type = 'S'
-        THEN
-            28 - (SELECT 
-                    IFNULL(MAX(seq), 0)
-                FROM
-                    `m_data`
-                WHERE
-                    `m_data`.`type` = 'L' AND S <> ''
-                        AND S <= `questionnaire_result`.`L`)
-        WHEN
-            type = 'C'
-        THEN
-            28 - (SELECT 
-                    IFNULL(MAX(seq), 0)
-                FROM
-                    `m_data`
-                WHERE
-                    `m_data`.`type` = 'L' AND C <> ''
-                        AND C <= `questionnaire_result`.`L`)
+        WHEN type = 'D' THEN 28 - (SELECT IFNULL(MAX(seq), 0) FROM m_data WHERE type = 'L' AND D <> '' AND D <= L)
+        WHEN type = 'I' THEN 28 - (SELECT IFNULL(MAX(seq), 0) FROM m_data WHERE type = 'L' AND I <> '' AND I <= L)
+        WHEN type = 'S' THEN 28 - (SELECT IFNULL(MAX(seq), 0) FROM m_data WHERE type = 'L' AND S <> '' AND S <= L)
+        WHEN type = 'C' THEN 28 - (SELECT IFNULL(MAX(seq), 0) FROM m_data WHERE type = 'L' AND C <> '' AND C <= L)
     END) AS L,
-    (CASE
-        WHEN
-            type = 'D'
-        THEN
-            (SELECT 
-                    IFNULL(MAX(seq), 0)
-                FROM
-                    `m_data`
-                WHERE
-                    `m_data`.`type` = 'O' AND D <> ''
-                        AND D <= `questionnaire_result`.`A`)
-        WHEN
-            type = 'I'
-        THEN
-            (SELECT 
-                    IFNULL(MAX(seq), 0)
-                FROM
-                    `m_data`
-                WHERE
-                    `m_data`.`type` = 'O' AND I <> ''
-                        AND I <= `questionnaire_result`.`A`)
-        WHEN
-            type = 'S'
-        THEN
-            (SELECT 
-                    IFNULL(MAX(seq), 0)
-                FROM
-                    `m_data`
-                WHERE
-                    `m_data`.`type` = 'O' AND S <> ''
-                        AND S <= `questionnaire_result`.`A`)
-        WHEN
-            type = 'C'
-        THEN
-            (SELECT 
-                    IFNULL(MAX(seq), 0)
-                FROM
-                    `m_data`
-                WHERE
-                    `m_data`.`type` = 'O' AND C <> ''
-                        AND C <= `questionnaire_result`.`A`)
+    (CASE 
+		WHEN type = 'D' THEN (SELECT IFNULL(MAX(seq), 0) FROM m_data WHERE type = 'O' AND D <> '' AND D <= A)
+        WHEN type = 'I' THEN (SELECT IFNULL(MAX(seq), 0) FROM m_data WHERE type = 'O' AND I <> '' AND I <= A)
+        WHEN type = 'S' THEN (SELECT IFNULL(MAX(seq), 0) FROM m_data WHERE type = 'O' AND S <> '' AND S <= A)
+        WHEN type = 'C' THEN (SELECT IFNULL(MAX(seq), 0) FROM m_data WHERE type = 'O' AND C <> '' AND C <= A)
     END) AS A
 FROM
-    `questionnaire_result`
+    questionnaire_result
 WHERE
-    `questionnaire_result`.`person_phone_num` = '" . $data[0]->person_phone_num . "' and type <>'#' order by SEQ;";
+    person_phone_num = '" . $data[0]->person_phone_num . "'
+        AND type <> '#'
+ORDER BY SEQ";
 
 $rows = Yii::app()->db->createCommand($sql)->queryAll();
 ?>
+
+
+<input type="hidden" id="image_url" name="Questionnaire[image_url]" value="">
+
+
 <div class="portlet light">
 	<div class="portlet-title">
 		<div class="caption">
@@ -152,8 +55,11 @@ $rows = Yii::app()->db->createCommand($sql)->queryAll();
 
 			</div>
 		<div class="actions">
+
+        
+            <input type="button" name="btnPrint" value="พิมพ์เอกสาร" onclick="redirectTo()" class="btn btn-warning btn-sm" />
 			<?php echo CHtml::link('ย้อนกลับ',array('Questionnaire/'),array('class'=>'btn btn-default btn-sm'));?>
-			</div>
+		</div>
 	</div>
 	<div class="portlet-body form">
 		<div class="form-body">
@@ -169,16 +75,15 @@ $rows = Yii::app()->db->createCommand($sql)->queryAll();
 				</tr>
 		    <?php
 		    
-    $posM = array();
-    $posL = array();
-    $posA = array();
-    
+
+    $xs1['name'] = 'Most';
+    $xs2['name'] = 'Least';
+    $xs3['name'] = 'Actual';
     $index = 0;
     foreach ($rows as $row) {
 
-//         if ($row["DATA_GROUP"] == 'Plotting Score') {
-            
-            
+
+
             echo "<tr>
 		    			<td style=\"width: 200px;text-align: center;\">{$row["type"]}</td>
 		    			<td style=\"width: 100px;text-align: center;\" title=\"".DISCUtils::getDesc($row["type"], $row["M"])."\">{$row["M"]}</td>
@@ -187,115 +92,110 @@ $rows = Yii::app()->db->createCommand($sql)->queryAll();
 		    		  </tr>";
             switch ($index) {
                 case 0:
-                    array_push($posM, array("y" => (int) $row["M"], "label" => "D"));
-                    array_push($posL, array("y" => (int) $row["L"], "label" => "D"));
-                    array_push($posA, array("y" => (int) $row["A"], "label" => "D"));
-                    
+                    $xs1['data'][0] = (int) $row["M"];
+                    $xs2['data'][0] = (int) $row["L"];
+                    $xs3['data'][0] = (int) $row["A"];
                     break;
                 case 1:
-                    array_push($posM, array("y" => (int) $row["M"], "label" => "I"));
-                    array_push($posL, array("y" => (int) $row["L"], "label" => "I"));
-                    array_push($posA, array("y" => (int) $row["A"], "label" => "I"));
+                    $xs1['data'][1] = (int) $row["M"];
+                    $xs2['data'][1] = (int) $row["L"];
+                    $xs3['data'][1] = (int) $row["A"];
                     break;
                 case 2:
-                    array_push($posM, array("y" => (int) $row["M"], "label" => "S"));
-                    array_push($posL, array("y" => (int) $row["L"], "label" => "S"));
-                    array_push($posA, array("y" => (int) $row["A"], "label" => "S"));
+                    $xs1['data'][2] = (int) $row["M"];
+                    $xs2['data'][2] = (int) $row["L"];
+                    $xs3['data'][2] = (int) $row["A"];
                     break;
                 case 3:
-                    array_push($posM, array("y" => (int) $row["M"], "label" => "C"));
-                    array_push($posL, array("y" => (int) $row["L"], "label" => "C" ));
-                    array_push($posA, array("y" => (int) $row["A"], "label" => "C"));
+                    $xs1['data'][3] = (int) $row["M"];
+                    $xs2['data'][3] = (int) $row["L"];
+                    $xs3['data'][3] = (int) $row["A"];
                     break;
             }
             $index ++;
-//         }
     }
-    
+    $xs1['type'] = 'line';
+    $xs2['type'] = 'line';
+    $xs3['type'] = 'line';
+
+    array_push($charts, $xs1);
+    array_push($charts, $xs2);
+    array_push($charts, $xs3);
+
     ?>
 	    </table>
 
 			<!-- END FORM-->
 
 		</div>
-		<div id="chartContainer" style="height: 370px; width: 100%;"></div>
+		<div id="container" style="height: 600px; width: 100%;"></div>
 
 	</div>
 </div>
 
 
+
+
+
+
+<script
+		src="<?php echo ConfigUtil::getAppName();?>/assets/global/plugins/jquery.min.js"
+		type="text/javascript"></script>
+
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
-<!-- <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script> -->
 <script>
 
-EXPORT_WIDTH = 1000;
-function save_chart(chart, filename) {
-		var render_width = EXPORT_WIDTH;
-		var render_height = render_width * chart.chartHeight / chart.chartWidth
-
-		var svg = chart.getSVG({
-			exporting: {
-				sourceWidth: chart.chartWidth,
-				sourceHeight: chart.chartHeight
-			}
+    var exportUrl = 'http://export.highcharts.com/';
+    var optionsStr = JSON.stringify(
+		{
+			"title": {
+                text: 'DISC'
+            },
+			"xAxis": {
+				"categories": [
+					"D",
+					"I",
+					"S",
+					"C"
+				]
+			},
+			"series": <?php echo json_encode($charts, JSON_NUMERIC_CHECK) ?>
 		});
 
-		var canvas = document.createElement('canvas');
-		canvas.height = render_height;
-		canvas.width = render_width;
+        dataString = encodeURI('async=true&type=jpeg&width=600&options=' + optionsStr);
 
-		var image = new Image;
-		image.onload = function() {
-			canvas.getContext('2d').drawImage(this, 0, 0, render_width, render_height);
-			var data = canvas.toDataURL("image/png")
-			download(data, filename + '.png');
-		};
-		image.src = 'data:image/svg+xml;base64,' + window.btoa(svg);
-}
+        if (window.XDomainRequest) {
+            var xdr = new XDomainRequest();
+            xdr.open("post", exportUrl+ '?' + dataString);
+            xdr.onload = function () {
+                console.log(xdr.responseText);
+                $('#container').html('<img src="' + exporturl + xdr.responseText + '"/>');
+            };
+            xdr.send();
+        } else {
+            $.ajax({
+                type: 'POST',
+                data: dataString,
+                url: exportUrl,
+                success: function (data) {
+                    console.log('get the file from relative url: ', data);
+                    $('#container').html('<img src="' + exportUrl + data + '"/>');
+					$("#image_url").val(data);
+                },
+                error: function (err) {
+                    debugger;
+                    console.log('error', err.statusText)
+                }
+            });
+        }
 
-function download(data, filename) {
-    var a = document.createElement('a');
-    a.download = filename;
-    a.href = data
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-}
+        function redirectTo(){
+            var _image_url = document.getElementById('image_url').value;
+            window.location.href = 'http://localhost:90/disc/management/index.php/Questionnaire/Print/'+_image_url;
+        }
 
 
-// window.onload = function () {
- 
-// var chart = new CanvasJS.Chart("chartContainer", {
-// 	title: {
-// 		text: "Result DISC"
-// 	},
-// 	axisY: {
-// 		title: "Value"
-// 	},
-// 	data: [{
-// 		type: "line",
-// 		showInLegend: true, 
-// 		legendText: "Most",
-// 		dataPoints: <?php echo json_encode($posM, $JSON_NUMERIC_CHECK); ?>
-// 	},{
-// 		type: "line",
-// 		showInLegend: true, 
-// 		legendText: "Least",
-// 		dataPoints: <?php echo json_encode($posL, $JSON_NUMERIC_CHECK); ?>
-// 	},{
-// 		type: "line",
-// 		showInLegend: true, 
-// 		legendText: "Actual",
-// 		dataPoints: <?php echo json_encode($posA, $JSON_NUMERIC_CHECK); ?>
-// 	}
-	
-
-	
-// 	]
-// });
-// chart.render();
- 
-// }
 </script>
+</form>

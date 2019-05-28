@@ -38,7 +38,7 @@ class QuestionnaireResult extends CActiveRecord {
 						'defaultOrder' => 't.id asc' 
 				),
 				'pagination' => array (
-						'pageSize' => 15 
+						'pageSize' => 1500 
 				) // ConfigUtil::getDefaultPageSize()
  
 		) );
