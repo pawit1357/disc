@@ -16,8 +16,6 @@ return array(
             'connectionString' => 'mysql:host=localhost;dbname=salayateac_disc',
             'emulatePrepare' => true,
 
-            'username' => 'root',
-            'password' => 'P@ssw0rd',
             'charset' => 'utf8'
         ),
         'Smtpmail' => array(
