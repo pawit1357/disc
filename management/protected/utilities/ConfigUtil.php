@@ -7,12 +7,15 @@ class ConfigUtil {
 	private static $hostName = 'https://www.salayatea.com/';
 	private static $siteName = 'https://www.salayatea.com/disc/index.php/Site/LogOut';
 	
-	
-	
+	private static $hightChartExportURL = 'http://export.highcharts.com/charts/';
+    private static $templateDiscDocPath = 'DISCTemplate.docx';
+    
+    
 	private static $ApplicationTitle = 'DISC | SALAYA TEA DISC';
 	private static $ApplicationCopyRight = '2012 &copy;';
 	private static $ApplicationAddress = '';
 	private static $ApplicationUpdateVersion = '<li class="fa fa-clock-o"></li><span> &nbsp;Lasted Update 2017-04-22</span>';
+	
 // 	private static $AppName = '';	
 	private static $AppName = '/disc/management';
 	
@@ -86,6 +89,13 @@ class ConfigUtil {
 	}
 	public static function getUrlHostName() {
 		return self::$hostName;
+	}
+	public static function getHightChartExportURL() {
+	    return self::$hightChartExportURL;
+	}
+	
+	public static function getDiscTemplaePath() {
+	    return getcwd() . "/uploads/template/".self::$templateDiscDocPath;
 	}
 	
 	/* EMAIL */

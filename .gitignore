@@ -1,3 +1,5 @@
 management/assets/
 management/documents/
 management/framework/
+management/uploads/
+management/protected/extensions/vendor/

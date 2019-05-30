@@ -12,10 +12,8 @@ require_once dirname(__FILE__).'/protected/utilities/CommonUtil.php';
 require_once dirname(__FILE__).'/protected/utilities/MailUtil.php';
 require_once dirname(__FILE__).'/protected/utilities/DISCUtils.php';
 
-
-
-
-
+//phpword
+require_once dirname(__FILE__).'/protected/extensions/vendor/autoload.php';
 
 // create a Web application instance and run
 $app = Yii::createWebApplication($config);

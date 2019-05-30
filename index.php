@@ -1,7 +1,7 @@
 <?php
 
 // wait 5 seconds and redirect :)
-echo "<meta http-equiv=\"refresh\" content=\"480;url=http://localhost:88/disc/timout.php\"/>";
+// echo "<meta http-equiv=\"refresh\" content=\"480;url=http://localhost:88/disc/timout.php\"/>";
 
 
 /************************************
@@ -25,7 +25,7 @@ $result = $db->query($sql);
 $data = array();
 while ($row = $result->fetch_object())
     $data[] = $row;
-$terms = json_encode($data);
+// $terms = json_encode($data);
 $show_mark = 0; // <-- show 1 or hide 0 the marker
 $cols = 4; // <-- number of columns
 $rows = count($data) / (4 * $cols);
@@ -112,148 +112,191 @@ input[type=radio] {
 }
 
 .disabledbutton {
-    pointer-events: none;
-    opacity: 0.4;
+	pointer-events: none;
+	opacity: 0.4;
 }
-
 </style>
 </head>
 <body>
 
 
 	<form method='post' action='result.php'>
-		<div style="text-align: center;">
-			DISC personality test questionnaires<br> <span
-				style="font-size: smaller;">** Modified from DISC Personality Test,
-				ISC **</span>
-		</div>
-		<table style="font-size: smaller;">
-			<tr>
-				<td>1) เลือกลักษณะที่ตรงกับตัวท่าน "มากที่สุด" จาก 4
-					ตัวเลือกในแต่ละข้อ โดยใส่เลข 1 ในช่อง "มากที่สุด"</td>
-			</tr>
-			<tr>
-				<td>2) เลือกลักษณะที่ตรงกับตัวท่าน "น้อยที่สุด" จาก 4
-					ตัวเลือกในแต่ละข้อ โดยใส่เลข 1 ในช่อง "น้อยที่สุด"</td>
-			</tr>
-			<tr>
-				<td>3) กรุณาจับเวลาในการทำบทดสอบนี้ และกรอกเวลาลงในช่อง
-					"ระยะเวลาในการทำแบบทดสอบ" ในท้ายข้อ 28</td>
-			</tr>
-			<tr>
-				<td>4) กรุณากรอกข้อมูลเพิ่มเติมท้ายแบบทดสอบ</td>
-			</tr>
-		</table>
-		<br>
+
 		<table>
+		<tr><td style="text-align: right;">เวลาที่ใช้ไป:<input type="text" name="time_value" id="time_value" style="width: 50px;text-align: right;" value="0 : 0 " readonly="readonly" />
+		</td></tr>
 			<tr>
-				<td>ชื่อ-นามสกุล:</td>
-				<td><input type="text" id="person_name" name="person_name" required ></td>
-				<td>เพศ:</td>
-				<td><select id="person_sex" name="person_sex">
-						<option value="1">ชาย</option>
-						<option value="2">หญิง</option>
-				</select></td>
-				<td>อายุ:</td>
-				<td><input type="text" id="person_age" name="person_age"required ></td>
-				<td>เบอร์โทรศัพท์:</td>
-				<td><input type="text" id="person_phone_num" name="person_phone_num"required ></td>
-				<td>อีเมล์:</td>
-				<td><input type="text" id="person_email" name="person_email"required ></td>
-<td>	    <button id="start">เริ่มทำแบบทดสอบ</button></td>
+				<td style="text-align: center;">DISC personality test questionnaires<br><span style="font-size: smaller;">** Modified from DISC Personality Test, ISC **</span></td>
 			</tr>
-		</table>
+			<tr>
+				<td>
+					<table>
+						<tr><td style="font-size: smaller;">1) เลือกลักษณะที่ตรงกับตัวท่าน "มากที่สุด" จาก 4 ตัวเลือกในแต่ละข้อ โดยใส่เลข 1 ในช่อง "มากที่สุด"</td></tr>
+						<tr><td style="font-size: smaller;">2) เลือกลักษณะที่ตรงกับตัวท่าน "น้อยที่สุด" จาก 4 ตัวเลือกในแต่ละข้อ โดยใส่เลข 1 ในช่อง "น้อยที่สุด"</td></tr>
+						<tr><td style="font-size: smaller;">3) กรุณาจับเวลาในการทำบทดสอบนี้ และกรอกเวลาลงในช่อง "ระยะเวลาในการทำแบบทดสอบ" ในท้ายข้อ 28</td></tr>
+						<tr><td style="font-size: smaller;">4) กรุณากรอกข้อมูลเพิ่มเติมท้ายแบบทดสอบ</td></tr>
+					</table> 
+					<br>
+					<table>
+						<tr><td>ชื่อ-นามสกุล:</td><td><input type="text" id="person_name" name="person_name" required></td>
+							<td>เพศ:</</td>
+							<td>
+							<select id="person_sex" name="person_sex">
+									<option value="1">ชาย</option>
+									<option value="2">หญิง</option>
+							</select>
+							</td>
+    							<td>อายุ:</td>
+    							<td><input type="text" id="person_age" name="person_age" maxlength="2" required>&nbsp;<span id="errmsg"></span></td>
+    							<td>เบอร์โทรศัพท์:</td>
+    							<td><input type="text" id="person_phone_num" name="person_phone_num" required></td>
+    							<td>อีเมล์:</td>
+    							<td><input type="text" id="person_email" name="person_email" required>&nbsp;<span id="errmsg2"></span></td>
+    							<td><button id="start">เริ่มทำแบบทดสอบ</button>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>
 
-		<br>
-<div id="ques">
-		<table>
-			<caption></caption>
-			<thead>
-				<tr>
-        <?php for($i=0;$i<$cols;++$i):?>
-          <th>No</th>
-					<th>term</th>
-					<th>Most</th>
-					<th>Least</th>
-        <?php endfor;?>
-        </tr>
-			</thead>
-			<tbody>
-
-
-
-
-
-      <?php
-    for ($i = 0; $i < $rows; ++ $i) {
-        echo "<tr" . ($i % 2 == 0 ? " class='dark'" : "") . ">";
-        for ($j = 0; $j < $cols; ++ $j) {
-            for ($n = 0; $n < 4; ++ $n) {
-                if ($j > 0 && $n == 0) {
+            		<div id="ques">
+            		<table>
+            			<caption></caption>
+            			<thead>
+            				<tr>
+                    <?php for($i=0;$i<$cols;++$i):?>
+                      <th>No</th>
+            					<th>term</th>
+            					<th>Most</th>
+            					<th>Least</th>
+                    <?php endfor;?>
+                    </tr>
+            			</thead>
+            			<tbody>
+                  <?php
+                for ($i = 0; $i < $rows; ++ $i) {
                     echo "<tr" . ($i % 2 == 0 ? " class='dark'" : "") . ">";
-                } elseif ($j == 0) {
-                    echo "<th rowspan='$cols'" . ($j == 0 ? " class='first'" : "") . ">" . ($i + $n * $rows + 1) . "</th>";
+                    for ($j = 0; $j < $cols; ++ $j) {
+                        for ($n = 0; $n < 4; ++ $n) {
+                            if ($j > 0 && $n == 0) {
+                                echo "<tr" . ($i % 2 == 0 ? " class='dark'" : "") . ">";
+                            } elseif ($j == 0) {
+                                echo "<th rowspan='$cols'" . ($j == 0 ? " class='first'" : "") . ">" . ($i + $n * $rows + 1) . "</th>";
+                            }
+                            echo "<td" . ($j == 0 ? " class='first'" : "") . ">
+            		          		{$data[$cols*($i+$n*$rows)+$j]->term}
+            		          	  </td>
+            		          	  <td" . ($j == 0 ? " class='first'" : "") . ">
+            		        		<input type='radio' id='m_".(($i + $n * $rows)+1) ."_".($j)."' 
+            		        		       name='m[" . ($i + $n * $rows) . "]' 
+            		        			   value='{$data[$cols*($i+$n*$rows)+$j]->most}' 
+            		        			   required />" . ($show_mark ? $data[$cols * ($i + $n * $rows) + $j]->most : '') . "</td>
+            		          	  <td" . ($j == 0 ? " class='first'" : "") . ">
+            		          		<input type='radio' id='l_".(($i + $n * $rows)+1) ."_".($j)."'
+            		          		       name='l[" . ($i + $n * $rows) . "]' 
+            		          		       value='{$data[$cols*($i+$n*$rows)+$j]->least}' 
+            		          		       required />" . ($show_mark ? $data[$cols * ($i + $n * $rows) + $j]->least : '') . "</td>";
+                        }
+                        echo "</tr>";
+                    }
                 }
-                echo "<td" . ($j == 0 ? " class='first'" : "") . ">
-		          		{$data[$cols*($i+$n*$rows)+$j]->term}
-		          	  </td>
-		          	  <td" . ($j == 0 ? " class='first'" : "") . ">
-		        		<input type='radio' id='m_".(($i + $n * $rows)+1) ."_".($j)."' 
-		        		       name='m[" . ($i + $n * $rows) . "]' 
-		        			   value='{$data[$cols*($i+$n*$rows)+$j]->most}' 
-		        			   required />" . ($show_mark ? $data[$cols * ($i + $n * $rows) + $j]->most : '') . "</td>
-		          	  <td" . ($j == 0 ? " class='first'" : "") . ">
-		          		<input type='radio' id='l_".(($i + $n * $rows)+1) ."_".($j)."'
-		          		       name='l[" . ($i + $n * $rows) . "]' 
-		          		       value='{$data[$cols*($i+$n*$rows)+$j]->least}' 
-		          		       required />" . ($show_mark ? $data[$cols * ($i + $n * $rows) + $j]->least : '') . "</td>";
-            }
-            echo "</tr>";
-        }
-    }
-    ?>
-      </tbody>
-			<tfoot>
-				<tr>
-					<th colspan='16'><input type='submit' value='process' class='btn' />
-					</th>
-				</tr>
-			</tfoot>
+                ?>
+                  </tbody>
+            			<tfoot>
+            				<tr>
+            					<th colspan='16'><input type='submit' value='process' class='btn' />
+            					</th>
+            				</tr>
+            			</tfoot>
+            		</table>
+            		</div>
+				</td>
+			</tr>
 		</table>
-		</div>
+
 	</form>
-	<progress value="0" max="480" id="progressBar"></progress>
+
 
 	
 </body>
 </html>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 <script>
-var timeleft = 480;
-function quesTimer(){
-    var downloadTimer = setInterval(function(){
-        console.log('x');
-      document.getElementById("progressBar").value = 480 - --timeleft;
-      if(timeleft <= 0)
-        clearInterval(downloadTimer);
-    },1000);
+var count=0;
+var timerVar=null;
+// window.onload=function(){
+//     timerVar=setTimeout("setTimer()",1000);
+// }
+
+function validateEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
 }
+
+function setTimer(){
+    clearTimeout(timerVar);
+    count+=1;
+    var item=document.getElementById("time_value");
+    
+    var totalSeconds = Math.floor(count);
+    var minutes = Math.floor(count/60);
+    var seconds = totalSeconds - minutes * 60;
+
+    
+    item.value= minutes + ' : ' + seconds+' ';
+    
+    timerVar=setTimeout("setTimer()",1000);
+}
+
 $('#start').on('click', function(){
-	$("#ques").removeClass("disabledbutton");
-	
-    quesTimer();
+
+
+	var person_name = $("#person_name").val();
+	var person_age = $("#person_age").val();
+	var person_phone_num = $("#person_phone_num").val();
+	var person_email = $("#person_email").val();
+
+	if(!validateEmail($("#person_email").val())){
+		alert('รูปแบบอีเมล์ไม่ถูกต้อง');
+		$("#person_email").focus();
+		return false;
+	}else{
+		if(person_name.length > 0 && person_age.length > 0 && person_phone_num.length > 0 && person_email.length > 0){
+			$("#ques").removeClass("disabledbutton");
+			timerVar=setTimeout("setTimer()",1000);
+		}
+	}
 });
+
+
+
+
 
 $(document).ready(function(){
 	$("#ques").addClass("disabledbutton");
 
+
+	  //called when key is pressed in textbox
+	  $("#person_age").keypress(function (e) {
+	     //if the letter is not digit then display error and don't type anything
+	     if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+	        //display error message
+	        $("#errmsg").html("ป้อนเฉพาะตัวเลข").show().fadeOut("slow");
+	               return false;
+	    }
+	   });
+	   
+
+	
 	$('input:radio').on('click',function(){
 		
 		  var m=$(this).attr('id');
 		  //-- Check for 
 		  if($('#'+(m.slice(0,1)=='m'?'l':'m')+'_'+m.slice(2)).is(':checked')){
 
-		      alert('You cannot select both of `most` and `least` choice in the same term')
+		      alert('คุณไม่สามารถเลือกได้ทั้งแบบ "most" และ "least" ในคำเดียวกัน')
 		      $('#'+m).prop('checked', false);
 		      
 		  }

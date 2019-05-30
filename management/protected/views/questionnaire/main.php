@@ -23,6 +23,7 @@
                                 <th>อายุ</th>
                                 <th>เบอร์โทรศัพท์</th>
                                 <th>อีเมล์</th>
+                                <th>เวลาที่ใช้ไป</th>
 								<th class="no-sort"></th>
 							</tr>
 						</thead>
@@ -41,6 +42,8 @@
 								<td class="center"><?php echo $data->person_age?></td>
 								<td class="center"><?php echo $data->person_phone_num?></td>
 								<td class="center"><?php echo $data->person_email?></td>
+								<td class="center"><?php echo CommonUtil::dateDifference( $data->start_date,$data->end_date);?></td>
+								
 								<td class="center">
     <?php if(UserLoginUtils::canUpdate( $_SERVER['REQUEST_URI'])){?>
     <a title="Edit" class="fa fa-info" href="<?php echo Yii::app()->CreateUrl('Questionnaire/Result/person_phone_num/'.$data->person_phone_num)?>"></a>

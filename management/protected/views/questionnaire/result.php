@@ -46,6 +46,7 @@ $rows = Yii::app()->db->createCommand($sql)->queryAll();
 
 
 <input type="hidden" id="image_url" name="Questionnaire[image_url]" value="">
+<input type="hidden" id="person_phone_num" name="Questionnaire[person_phone_num]" value="<? echo $data[0]->person_phone_num ?>">
 
 
 <div class="portlet light">
@@ -164,7 +165,7 @@ $rows = Yii::app()->db->createCommand($sql)->queryAll();
 			"series": <?php echo json_encode($charts, JSON_NUMERIC_CHECK) ?>
 		});
 
-        dataString = encodeURI('async=true&type=jpeg&width=600&options=' + optionsStr);
+        dataString = encodeURI('async=true&type=jpeg&width=550&options=' + optionsStr);
 
         if (window.XDomainRequest) {
             var xdr = new XDomainRequest();
@@ -193,7 +194,8 @@ $rows = Yii::app()->db->createCommand($sql)->queryAll();
 
         function redirectTo(){
             var _image_url = document.getElementById('image_url').value;
-            window.location.href = 'http://localhost:90/disc/management/index.php/Questionnaire/Print/'+_image_url;
+            var _phone_num = document.getElementById('person_phone_num').value;
+            window.location.href = 'http://localhost:90/disc/management/index.php/Questionnaire/Print/'+_image_url+'/phone_num/'+_phone_num;
         }
 
 
