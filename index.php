@@ -25,7 +25,7 @@ $result = $db->query($sql);
 $data = array();
 while ($row = $result->fetch_object())
     $data[] = $row;
-// $terms = json_encode($data);
+
 $show_mark = 0; // <-- show 1 or hide 0 the marker
 $cols = 4; // <-- number of columns
 $rows = count($data) / (4 * $cols);
@@ -139,7 +139,7 @@ input[type=radio] {
 					<br>
 					<table>
 						<tr><td>ชื่อ-นามสกุล:</td><td><input type="text" id="person_name" name="person_name" required></td>
-							<td>เพศ:</</td>
+							<td>เพศ:</td>
 							<td>
 							<select id="person_sex" name="person_sex">
 									<option value="1">ชาย</option>
@@ -288,7 +288,6 @@ $(document).ready(function(){
 	    }
 	   });
 	   
-
 	
 	$('input:radio').on('click',function(){
 		

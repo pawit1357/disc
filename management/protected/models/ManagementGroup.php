@@ -1,10 +1,10 @@
 <?php
-class QuestionnaireResult extends CActiveRecord {
+class ManagementGroup extends CActiveRecord {
 	public static function model($className = __CLASS__) {
 		return parent::model ( $className );
 	}
 	public function tableName() {
-		return 'questionnaire_result';
+		return 'tb_management_group';
 	}
 	public function relations() {
 		return array ();
@@ -12,7 +12,7 @@ class QuestionnaireResult extends CActiveRecord {
 	public function rules() {
 		return array (
 				array (
-						'id,type,M,L,A,person_phone_num,create_date',
+						'id,name,description,is_active',
 						'safe' 
 				) 
 		);
@@ -32,6 +32,7 @@ class QuestionnaireResult extends CActiveRecord {
 	}
 	public function search() {
 		$criteria = new CDbCriteria ();
+		$criteria->condition = 'id <> 1';
 		return new CActiveDataProvider ( get_class ( $this ), array (
 				'criteria' => $criteria,
 				'sort' => array (
