@@ -25,7 +25,7 @@ class DISCUtils
         $seq = 1;
         foreach ($result as $item) {
             
-            $desc = $desc . "#" .$clean_code = preg_replace('/[^a-zA-Z]/', '', $item->desc_short).','. $item->desc;
+            $desc = $desc . "#" . preg_replace('/[^a-zA-Z]/', '', $item->desc_short).','. $item->desc;
             $seq ++;
         }
         return substr($desc, 1);

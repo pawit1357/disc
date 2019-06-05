@@ -12,10 +12,10 @@
  *************************************/
 // -- database configuration
 $dbhost = 'localhost';
-// $dbuser='salayateac_disc';
-// $dbpass='9bNMMbbwRke3';
-$dbuser = 'root';
-$dbpass = 'P@ssw0rd';
+$dbuser='salayateac_disc';
+$dbpass='9bNMMbbwRke3';
+// $dbuser = 'root';
+// $dbpass = 'P@ssw0rd';
 $dbname = 'salayateac_disc';
 // -- database connection
 $db = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
@@ -131,10 +131,12 @@ input[type=radio] {
 			<tr>
 				<td>
 					<table>
-						<tr><td style="font-size: smaller;">1) เลือกลักษณะที่ตรงกับตัวท่าน "มากที่สุด" จาก 4 ตัวเลือกในแต่ละข้อ โดยใส่เลข 1 ในช่อง "มากที่สุด"</td></tr>
-						<tr><td style="font-size: smaller;">2) เลือกลักษณะที่ตรงกับตัวท่าน "น้อยที่สุด" จาก 4 ตัวเลือกในแต่ละข้อ โดยใส่เลข 1 ในช่อง "น้อยที่สุด"</td></tr>
-						<tr><td style="font-size: smaller;">3) กรุณาจับเวลาในการทำบทดสอบนี้ และกรอกเวลาลงในช่อง "ระยะเวลาในการทำแบบทดสอบ" ในท้ายข้อ 28</td></tr>
-						<tr><td style="font-size: smaller;">4) กรุณากรอกข้อมูลเพิ่มเติมท้ายแบบทดสอบ</td></tr>
+						<tr><td style="font-size: smaller;">1. กรุณากรอกข้อมูลก่อนทำแบบทดสอบ</td></tr>
+						<tr><td style="font-size: smaller;">2. แบบทดสอบมีทั้งหมด 28 ข้อ 4 ตัวเลือก</td></tr>
+						<tr><td style="font-size: smaller;">3. ใน 1 ข้อสามารถเลือกได้ 2 ตัวเลือก โดยไม่ซ้ำกัน</td></tr>
+						<tr><td style="font-size: smaller;">4. เลือกลักษณะที่ตรงกับตัวท่าน “มากที่สุด” โดยกดเลือกในช่อง “มากที่สุด”</td></tr>
+						<tr><td style="font-size: smaller;">5. เลือกลัษณะที่ตรงกับตัวท่าน “น้อยที่สุด” โดยกดเลือกในช่อง “น้อยที่สุด”</td></tr>
+
 					</table> 
 					<br>
 					<table>
@@ -168,9 +170,9 @@ input[type=radio] {
             				<tr>
                     <?php for($i=0;$i<$cols;++$i):?>
                       <th>No</th>
-            					<th>term</th>
-            					<th>Most</th>
-            					<th>Least</th>
+            					<th>ลักษณะของคุณ</th>
+            					<th>มากที่สุด</th>
+            					<th>น้อยที่สุด</th>
                     <?php endfor;?>
                     </tr>
             			</thead>
@@ -295,7 +297,7 @@ $(document).ready(function(){
 		  //-- Check for 
 		  if($('#'+(m.slice(0,1)=='m'?'l':'m')+'_'+m.slice(2)).is(':checked')){
 
-		      alert('คุณไม่สามารถเลือกได้ทั้งแบบ "most" และ "least" ในคำเดียวกัน')
+		      alert('คุณไม่สามารถเลือกได้ทั้งแบบ "มากที่สุด" และ "น้อยที่สุด" ในคำเดียวกัน')
 		      $('#'+m).prop('checked', false);
 		      
 		  }

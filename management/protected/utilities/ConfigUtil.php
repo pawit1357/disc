@@ -1,13 +1,15 @@
 <?php
 class ConfigUtil {
 	private static $emailSubject = 'DISC MANAGEMENT';
-// 	private static $hostName = 'http://localhost:88/';
-// 	private static $siteName = 'http://localhost:88/disc/management/index.php/Site/LogOut';
+	private static $hostName = 'http://localhost:90';
+	private static $siteName = 'http://localhost:/disc/management/index.php/Site/LogOut';
 	
-	private static $hostName = 'https://www.salayatea.com/';
-	private static $siteName = 'https://www.salayatea.com/disc/index.php/Site/LogOut';
+// 	private static $hostName = 'https://www.salayatea.com';
+// 	private static $siteName = 'https://www.salayatea.com/disc/index.php/Site/LogOut';
 	
-	private static $hightChartExportURL = 'http://export.highcharts.com/charts/';
+	private static $AppName = '/disc/management';
+	
+	private static $hightChartExportURL = 'https://export.highcharts.com/';
     private static $templateDiscDocPath = 'DISCTemplate.docx';
     
     
@@ -16,8 +18,7 @@ class ConfigUtil {
 	private static $ApplicationAddress = '';
 	private static $ApplicationUpdateVersion = '<li class="fa fa-clock-o"></li><span> &nbsp;Lasted Update 2017-04-22</span>';
 	
-// 	private static $AppName = '';	
-	private static $AppName = '/disc/management';
+
 	
 	private static $btnAddButton = 'เพิ่มข้อมูล';
 	private static $btnSaveButton = 'บันทึก';
