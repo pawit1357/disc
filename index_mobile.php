@@ -26,75 +26,9 @@ $data = array();
 while ($row = $result->fetch_object())
     $data[] = $row;
 
-$show_mark = 0; // <-- show 1 or hide 0 the marker
-$cols = 4; // <-- number of columns
-$rows = count($data) / (4 * $cols);
-
-
-
-function isMobileCheck(){
-    $isMobile = false;
-    $op = strtolower($_SERVER['HTTP_X_OPERAMINI_PHONE']);
-    $ua = strtolower($_SERVER['HTTP_USER_AGENT']);
-    $ac = strtolower($_SERVER['HTTP_ACCEPT']);
-    $ip = $_SERVER['REMOTE_ADDR'];
-    
-    $isMobile = strpos($ac, 'application/vnd.wap.xhtml+xml') !== false
-    || $op != ''
-        || strpos($ua, 'sony') !== false
-        || strpos($ua, 'symbian') !== false
-        || strpos($ua, 'nokia') !== false
-        || strpos($ua, 'samsung') !== false
-        || strpos($ua, 'mobile') !== false
-        || strpos($ua, 'windows ce') !== false
-        || strpos($ua, 'epoc') !== false
-        || strpos($ua, 'opera mini') !== false
-        || strpos($ua, 'nitro') !== false
-        || strpos($ua, 'j2me') !== false
-        || strpos($ua, 'midp-') !== false
-        || strpos($ua, 'cldc-') !== false
-        || strpos($ua, 'netfront') !== false
-        || strpos($ua, 'mot') !== false
-        || strpos($ua, 'up.browser') !== false
-        || strpos($ua, 'up.link') !== false
-        || strpos($ua, 'audiovox') !== false
-        || strpos($ua, 'blackberry') !== false
-        || strpos($ua, 'ericsson,') !== false
-        || strpos($ua, 'panasonic') !== false
-        || strpos($ua, 'philips') !== false
-        || strpos($ua, 'sanyo') !== false
-        || strpos($ua, 'sharp') !== false
-        || strpos($ua, 'sie-') !== false
-        || strpos($ua, 'portalmmm') !== false
-        || strpos($ua, 'blazer') !== false
-        || strpos($ua, 'avantgo') !== false
-        || strpos($ua, 'danger') !== false
-        || strpos($ua, 'palm') !== false
-        || strpos($ua, 'series60') !== false
-        || strpos($ua, 'palmsource') !== false
-        || strpos($ua, 'pocketpc') !== false
-        || strpos($ua, 'smartphone') !== false
-        || strpos($ua, 'rover') !== false
-        || strpos($ua, 'ipaq') !== false
-        || strpos($ua, 'au-mic,') !== false
-        || strpos($ua, 'alcatel') !== false
-        || strpos($ua, 'ericy') !== false
-        || strpos($ua, 'up.link') !== false
-        || strpos($ua, 'vodafone/') !== false
-        || strpos($ua, 'wap1.') !== false
-        || strpos($ua, 'wap2.') !== false;
-        return $isMobile;
-}
-
-
-if(isMobileCheck()){
-    //echo "Browse from mobile phone";
-    header( "location: index_mobile.php" );
-    exit(0);
-}else{
-    //echo "Browse from Other";
-}
-
+// $show_mark = 0; // <-- show 1 or hide 0 the marker
+// $cols = 4; // <-- number of columns
+// $rows = count($data) / (4 * $cols);
 
 ?>
 <html>
@@ -104,7 +38,7 @@ if(isMobileCheck()){
 
 body, table {
 	font-family: verdana, arial, sans-serif;
-	font-size: 1em;
+	font-size: 1em;width: 100%;
 }
 
 input {
@@ -188,36 +122,13 @@ input[type=radio] {
 	border: 3px double #CCCCCC;
 	width: 230px;
 }
-
-/* #pageloader */
-/* { */
-/*   background: rgba( 255, 255, 255, 0.8 ); */
-/*   display: none; */
-/*   height: 100%; */
-/*   position: fixed; */
-/*   width: 100%; */
-/*   z-index: 9999; */
-/* } */
-
-/* #pageloader img */
-/* { */
-/*   left: 50%; */
-/*   margin-left: -32px; */
-/*   margin-top: -32px; */
-/*   position: absolute; */
-/*   top: 50%; */
-/* } */
-
 </style>
 </head>
 <body>
 
-<!-- <div id="pageloader"> -->
-<!--    <img src="/disc/images/pageLoader.gif" alt="processing..." /> -->
-<!-- </div> -->
 
-	<form id="myform" method='post' action='result.php'>
-
+	<form method='post' action='result.php'>
+<div style="overflow-x:auto;">
 		<table>
 		<tr><td style="text-align: right;">เวลาที่ใช้ไป:<input type="text" name="time_value" id="time_value" style="width: 50px;text-align: right;" value="0 : 0 " readonly="readonly" />
 		</td></tr>
@@ -236,24 +147,41 @@ input[type=radio] {
 					</table> 
 					<br>
 					<table>
-						<tr><td style="text-align:right">ชื่อ-นามสกุล:</td><td><input type="text" id="person_name" name="person_name" class='tb6' required></td>
+						<tr>
+							<td style="text-align:right">ชื่อ-นามสกุล:</td>
+							<td><input type="text" id="person_name" name="person_name" class='tb6'
+								required></td>
+						</tr>
+						<tr>
 							<td style="text-align:right">เพศ:</td>
-							<td>
-							<select id="person_sex" name="person_sex" class='tb6'>
+							<td><select id="person_sex" name="person_sex" class='tb6'>
 									<option value="1">ชาย</option>
 									<option value="2">หญิง</option>
-							</select>
-							</td>
-							</tr>
-							<tr>
-    							<td style="text-align:right">อายุ:</td>
-    							<td><input type="text" id="person_age" name="person_age" class='tb6' maxlength="2" required>&nbsp;<span id="errmsg"></span></td>
-    							<td style="text-align:right">เบอร์โทรศัพท์:</td>
-    							<td><input type="text" id="person_phone_num" class='tb6' name="person_phone_num" required></td>
-    							<td style="text-align:right">อีเมล์:</td>
-    							<td><input type="text" id="person_email" name="person_email" class='tb6' required>&nbsp;<span id="errmsg2"></span></td>
-    							<td><button id="start" class='btn'>เริ่มทำแบบทดสอบ</button>
-							</td>
+							</select></td>
+						</tr>
+						<tr>
+							<td style="text-align:right">อายุ:</td>
+							<td><input type="text" id="person_age" name="person_age" class='tb6'
+								maxlength="2" required>&nbsp;<span id="errmsg"></span></td>
+						</tr>
+						<tr>
+							<td style="text-align:right">เบอร์โทรศัพท์:</td>
+							<td><input type="text" id="person_phone_num" class='tb6'
+								name="person_phone_num" required></td>
+						</tr>
+						<tr>
+							<td style="text-align:right">อีเมล์:</td>
+							<td><input type="text" id="person_email" name="person_email" class='tb6'
+								required>&nbsp;<span id="errmsg2"></span></td>
+						
+						
+						<tr>
+						
+						
+						<tr>
+							<td></td>
+							<td><button id="start" class='btn' >เริ่มทำแบบทดสอบ</button></td>
+
 						</tr>
 					</table>
 				</td>
@@ -266,42 +194,29 @@ input[type=radio] {
             			<caption></caption>
             			<thead>
             				<tr>
-                    <?php for($i=0;$i<$cols;++$i):?>
-                      <th>No</th>
+                    <?//php for($i=0;$i<2;++$i):?>
+                      			<th>No</th>
             					<th>ลักษณะของคุณ</th>
             					<th>มากที่สุด</th>
             					<th>น้อยที่สุด</th>
-                    <?php endfor;?>
+                    <?//php endfor;?>
                     </tr>
             			</thead>
             			<tbody>
                   <?php
-                for ($i = 0; $i < $rows; ++ $i) {
-                    echo "<tr" . ($i % 2 == 0 ? " class='dark'" : "") . ">";
-                    for ($j = 0; $j < $cols; ++ $j) {
-                        for ($n = 0; $n < 4; ++ $n) {
-                            if ($j > 0 && $n == 0) {
-                                echo "<tr" . ($i % 2 == 0 ? " class='dark'" : "") . ">";
-                            } elseif ($j == 0) {
-                                echo "<th rowspan='$cols'" . ($j == 0 ? " class='first'" : "") . ">" . ($i + $n * $rows + 1) . "</th>";
-                            }
-                            echo "<td" . ($j == 0 ? " class='first'" : "") . ">
-            		          		{$data[$cols*($i+$n*$rows)+$j]->term}
-            		          	  </td>
-            		          	  <td" . ($j == 0 ? " class='first'" : "") . ">
-            		        		<input type='radio' id='m_".(($i + $n * $rows)+1) ."_".($j)."' 
-            		        		       name='m[" . ($i + $n * $rows) . "]' 
-            		        			   value='{$data[$cols*($i+$n*$rows)+$j]->most}' 
-            		        			   required />" . ($show_mark ? $data[$cols * ($i + $n * $rows) + $j]->most : '') . "</td>
-            		          	  <td" . ($j == 0 ? " class='first'" : "") . ">
-            		          		<input type='radio' id='l_".(($i + $n * $rows)+1) ."_".($j)."'
-            		          		       name='l[" . ($i + $n * $rows) . "]' 
-            		          		       value='{$data[$cols*($i+$n*$rows)+$j]->least}' 
-            		          		       required />" . ($show_mark ? $data[$cols * ($i + $n * $rows) + $j]->least : '') . "</td>";
+                    for ($i = 0; $i < 112 ; $i++) {
+                        echo '<tr class=\'dark\'>';
+                        if($i==0){
+                            echo '<th rowspan=\'4\'>'.(($i/4)+1).'</th>';
                         }
-                        echo "</tr>";
+                        if ($i > 0 && $i % 4  == 0) {
+                            echo '<th rowspan=\'4\' class=\'first\'>'.(($i/4)+1).'</th>';
+                        }
+                        echo '<td '.(($i > 0 && $i % 4  == 0)? 'class=\'first\'':'').' >'.$data[$i]->term.'</td>';
+                        echo '<td '.(($i > 0 && $i % 4  == 0)? 'class=\'first\'':'').' ><input type=\'radio\' id=\'m_'.$data[$i]->no.'_'.($i%4).'\' name=\'m['.(((int)$data[$i]->no)-1).']\' value=\''.$data[$i]->most.'\' required /></td>';
+                        echo '<td '.(($i > 0 && $i % 4  == 0)? 'class=\'first\'':'').' ><input type=\'radio\' id=\'l_'.$data[$i]->no.'_'.($i%4).'\' name=\'l['.(((int)$data[$i]->no)-1).']\' value=\''.$data[$i]->least.'\' required /></td>';
+                        echo '</tr>';
                     }
-                }
                 ?>
                   </tbody>
             			<tfoot>
@@ -315,7 +230,7 @@ input[type=radio] {
 				</td>
 			</tr>
 		</table>
-
+</div>
 	</form>
 
 
@@ -326,8 +241,9 @@ input[type=radio] {
 <script>
 var count=0;
 var timerVar=null;
-
-
+// window.onload=function(){
+//     timerVar=setTimeout("setTimer()",1000);
+// }
 
 function validateEmail(email) {
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -374,12 +290,6 @@ $('#start').on('click', function(){
 
 
 $(document).ready(function(){
-
-// 	  $("#myform").on("submit", function(){
-
-// 		  $("#pageloader").fadeIn();
-// 		});//submit
-		  
 	$("#ques").addClass("disabledbutton");
 
 

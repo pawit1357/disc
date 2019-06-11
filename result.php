@@ -3,10 +3,10 @@ date_default_timezone_set("Asia/Bangkok");
 
 // -- database configuration
 $dbhost = 'localhost';
-$dbuser = 'salayateac_disc';
-$dbpass = '9bNMMbbwRke3';
-// $dbuser = 'root';
-// $dbpass = 'P@ssw0rd';
+// $dbuser = 'salayateac_disc';
+// $dbpass = '9bNMMbbwRke3';
+$dbuser = 'root';
+$dbpass = 'P@ssw0rd';
 $dbname = 'salayateac_disc';
 // -- database connection
 $db = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
