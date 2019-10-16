@@ -3,13 +3,6 @@
 // wait 5 seconds and redirect :)
 // echo "<meta http-equiv=\"refresh\" content=\"480;url=http://localhost:88/disc/timout.php\"/>";
 
-
-/************************************
- FILENAME     : index.php
- AUTHOR       : CAHYA DSN
- CREATED DATE : 2015-01-11
- UPDATED DATE : 2018-04-27
- *************************************/
 // -- database configuration
 $dbhost = 'localhost';
 $dbuser='salayateac_disc';
@@ -138,50 +131,33 @@ input[type=radio] {
 			<tr>
 				<td>
 					<table>
-						<tr><td style="font-size: smaller;">1. กรุณากรอกข้อมูลก่อนทำแบบทดสอบ</td></tr>
-						<tr><td style="font-size: smaller;">2. แบบทดสอบมีทั้งหมด 28 ข้อ 4 ตัวเลือก</td></tr>
-						<tr><td style="font-size: smaller;">3. ใน 1 ข้อสามารถเลือกได้ 2 ตัวเลือก โดยไม่ซ้ำกัน</td></tr>
-						<tr><td style="font-size: smaller;">4. เลือกลักษณะที่ตรงกับตัวท่าน “มากที่สุด” โดยกดเลือกในช่อง “มากที่สุด”</td></tr>
-						<tr><td style="font-size: smaller;">5. เลือกลัษณะที่ตรงกับตัวท่าน “น้อยที่สุด” โดยกดเลือกในช่อง “น้อยที่สุด”</td></tr>
+						<tr><td style="font-size: smaller;">1. กรุณากรอกข้อมูลก่อนทำแบบทดสอบ/Fill in your information before doing the test</td></tr>
+						<tr><td style="font-size: smaller;">2. แบบทดสอบมีทั้งหมด 28 ข้อ 4 ตัวเลือก/This test has 28 items with 4 answers</td></tr>
+						<tr><td style="font-size: smaller;">3. ใน 1 ข้อสามารถเลือกได้ 2 ตัวเลือก โดยไม่ซ้ำกัน/In each item, you can choose 2 answers<////td></tr>
+						<tr><td style="font-size: smaller;">4. เลือกลักษณะที่ตรงกับตัวท่าน “มากที่สุด” โดยกดเลือกในช่อง “มากที่สุด”/Choose the answer that is the best match for you, click on “strongly agree”</td></tr>
+						<tr><td style="font-size: smaller;">5. เลือกลัษณะที่ตรงกับตัวท่าน “น้อยที่สุด” โดยกดเลือกในช่อง “น้อยที่สุด”/Choose the answer that is the least match for you, click on ‘strongly disagree”</td></tr>
 
 					</table> 
 					<br>
 					<table>
-						<tr>
-							<td style="text-align:right">ชื่อ-นามสกุล:</td>
-							<td><input type="text" id="person_name" name="person_name" class='tb6'
-								required></td>
-						</tr>
-						<tr>
-							<td style="text-align:right">เพศ:</td>
-							<td><select id="person_sex" name="person_sex" class='tb6'>
+						<tr><td style="text-align:right">ชื่อ-นามสกุล/Name-Surname:</td><td><input type="text" id="person_name" name="person_name" class='tb6' required></td>
+							<td style="text-align:right">เพศ/Sex:</td>
+							<td>
+							<select id="person_sex" name="person_sex" class='tb6'>
 									<option value="1">ชาย</option>
 									<option value="2">หญิง</option>
-							</select></td>
-						</tr>
-						<tr>
-							<td style="text-align:right">อายุ:</td>
-							<td><input type="text" id="person_age" name="person_age" class='tb6'
-								maxlength="2" required>&nbsp;<span id="errmsg"></span></td>
-						</tr>
-						<tr>
-							<td style="text-align:right">เบอร์โทรศัพท์:</td>
-							<td><input type="text" id="person_phone_num" class='tb6'
-								name="person_phone_num" required></td>
-						</tr>
-						<tr>
-							<td style="text-align:right">อีเมล์:</td>
-							<td><input type="text" id="person_email" name="person_email" class='tb6'
-								required>&nbsp;<span id="errmsg2"></span></td>
-						
-						
-						<tr>
-						
-						
-						<tr>
-							<td></td>
-							<td><button id="start" class='btn' >เริ่มทำแบบทดสอบ</button></td>
-
+							</select>
+							</td>
+							</tr>
+							<tr>
+    							<td style="text-align:right">อายุ/Age:</td>
+    							<td><input type="text" id="person_age" name="person_age" class='tb6' maxlength="2" required>&nbsp;<span id="errmsg"></span></td>
+    							<td style="text-align:right">เบอร์โทรศัพท์/Tel:</td>
+    							<td><input type="text" id="person_phone_num" class='tb6' name="person_phone_num" required></td>
+    							<td style="text-align:right">อีเมล์/Email:</td>
+    							<td><input type="text" id="person_email" name="person_email" class='tb6' required>&nbsp;<span id="errmsg2"></span></td>
+    							<td><button id="start" class='btn'>เริ่มทำแบบทดสอบ/Start</button>
+							</td>
 						</tr>
 					</table>
 				</td>
